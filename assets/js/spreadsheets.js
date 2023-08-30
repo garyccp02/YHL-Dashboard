@@ -1,27 +1,32 @@
 const sheetId = '1CrU1rW2Ngx9X-yn-U0VQd2luNl8XhPshY4liqgDp7C8';
 const base = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?`;
-const sheetName = 'BENO COMPANY';
-const query = encodeURIComponent('SELECT U WHERE N=37')
-const url = `https://cors-anywhere.herokuapp.com/${base}&sheet=${sheetName}&tq=${query}`
-const data = []
+const sheetName1 = 'BENO COMPANY';
+const sheetName2 = 'Action and Follow up'; 
+const query1 = encodeURIComponent('SELECT U WHERE N=37')
+const query2 = encodeURIComponent('SELECT P WHERE C=37')
+const url1 = `https://cors-anywhere.herokuapp.com/${base}&sheet=${sheetName1}&tq=${query1}`
+const url2 = `https://cors-anywhere.herokuapp.com/${base}&sheet=${sheetName2}&tq=${query2}`
+data = []
 document.addEventListener('DOMContentLoaded', init)
-const output = document.querySelector('.output')
+output = document.querySelector('.output')
 
 function init() {
-    fetch(url)
+
+
+    fetch(url1)
         .then(res => res.text())
         .then(rep => {
             //Remove additional text and extract only JSON:
-            const jsonData = JSON.parse(rep.substring(47).slice(0, -2));
-            console.log(rep)
-            const colz = [];
-            const tr = document.createElement('tr');
+            jsonData = JSON.parse(rep.substring(47).slice(0, -2));
+
+            colz = [];
+            tr = document.createElement('tr');
             //Extract column labels
             jsonData.table.cols.forEach((heading) => {
                 if (heading.label) {
                     let column = heading.label;
                     colz.push(column);
-                    const th = document.createElement('th');
+                    th = document.createElement('th');
                     th.innerText = column;
                     tr.appendChild(th);
                 }
@@ -29,30 +34,90 @@ function init() {
             
             //extract row data:
             jsonData.table.rows.forEach((rowData) => {
-                const row = {};
+                row = {};
                 colz.forEach((ele, ind) => {
                     row[ele] = (rowData.c[ind] != null) ? rowData.c[ind].v : '';
                 })
                 data.push(row);
+
             })
-            processRows(data);
-            console.log(data)
+            processRows1(data);
+
         })
+
+        fetch(url2)
+        .then(res => res.text())
+        .then(rep => {
+            //Remove additional text and extract only JSON:
+            jsonData = JSON.parse(rep.substring(47).slice(0, -2));
+
+            colz = [];
+            tr = document.createElement('tr');
+            //Extract column labels
+            jsonData.table.cols.forEach((heading) => {
+                if (heading.label) {
+                    let column = heading.label;
+                    colz.push(column);
+                    th = document.createElement('th');
+                    th.innerText = column;
+                    tr.appendChild(th);
+                }
+            })
+            
+            //extract row data:
+            jsonData.table.rows.forEach((rowData) => {
+                row = {};
+                colz.forEach((ele, ind) => {
+                    row[ele] = (rowData.c[ind] != null) ? rowData.c[ind].v : '';
+                })
+                data.push(row);
+
+            })
+            processRows2(data);
+
+        })    
 }
  
-function processRows(json) {
+function processRows1(json) {
     json.forEach((row) => {
-        const tr = document.createElement('tr');
-        const keys = Object.keys(row);
-    
+        tr = document.createElement('tr');
+        keys = Object.keys(row);
+
         keys.forEach((key) => {
-            const td = document.createElement('td');
+            td = document.createElement('td');
+
             td.textContent = row[key];
             tr.appendChild(td);
-            console.log(td)
+
             
         })
-        output.appendChild(tr);
-        console.log(tr)
+        
+        document.getElementById("output1").innerHTML = tr.cells[0].innerText;
+        console.log("sp1 tr");
+        console.log(tr.cells[0].innerText);
+
+
+    })
+    
+}
+
+function processRows2(json) {
+    json.forEach((row) => {
+        tr = document.createElement('tr');
+        keys = Object.keys(row);
+
+        keys.forEach((key) => {
+            td = document.createElement('td');
+
+            td.textContent = row[key];
+            tr.appendChild(td);
+
+            
+        })
+      
+        document.getElementById("output2").innerHTML = tr.cells[0].innerText;
+        console.log("sp2 tr");
+        console.log(tr.cells[0].innerText);
+
     })
 }
