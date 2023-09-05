@@ -233,13 +233,13 @@ var myBar = null;
                     <a href="../pages/dashboard.html"><p class="text-sm mb-0 text-uppercase font-weight-bold">AA</p></a>
                   
                     
-                    <h5 class="font-weight-bolder">
-                      115 miles
+                    <h5 id="output1" class="font-weight-bolder">
+                    
                     </h5>
                   
                     <a href="../pages/dashboard.html"><p class="text-sm mb-0 text-uppercase font-weight-bold">Number of walk last week</p></a>
-                    <h5 class="font-weight-bolder">
-                        125 miles
+                    <h5 id="output2" class="font-weight-bolder">
+                        
                       </h5>
                       <p class="mb-0">
                         <span class="text-success text-sm font-weight-bolder">+15%</span>
@@ -263,20 +263,18 @@ var myBar = null;
                 <div class="col-8">
                   <div class="numbers">
                     <p class="text-sm mb-0 text-uppercase font-weight-bold">CS</p>
-                    <h5 class="font-weight-bolder">
-                        105
+                    <h5 id="output3" class="font-weight-bolder">
                       </h5>
                       <p class="mb-0">
                         <span class="text-danger text-sm font-weight-bolder">-10%</span>
-                        since yesterday
+                        Percentage of completed walks
                       </p>
   
-                      <h5 class="font-weight-bolder">
-                          125
+                      <h5 id="output4" class="font-weight-bolder">
                         </h5>
                         <p class="mb-0">
                           <span class="text-success text-sm font-weight-bolder">+15%</span>
-                          since yesterday
+                          since last week
                         </p>
                   </div>
                 </div>
@@ -296,20 +294,17 @@ var myBar = null;
                 <div class="col-8">
                   <div class="numbers">
                     <p class="text-sm mb-0 text-uppercase font-weight-bold">SubCon</p>
-                    <h5 class="font-weight-bolder">
-                        115
-                      </h5>
+                    <h5 id="output5" class="font-weight-bolder"></h5>
                       <p class="mb-0">
                         <span class="text-success text-sm font-weight-bolder">+10%</span>
-                        since yesterday
+                        Percentage of completed walks
                       </p>
   
-                      <h5 class="font-weight-bolder">
-                          100
+                      <h5 id="output6" class="font-weight-bolder">
                         </h5>
                         <p class="mb-0">
                           <span class="text-danger text-sm font-weight-bolder">-15%</span>
-                          since yesterday
+                          since last week
                         </p>
                   </div>
                 </div>
@@ -720,6 +715,11 @@ var myBar = null;
   <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
   <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
   <script src="../assets/js/plugins/chartjs.min.js"></script>
+
+  <!-- Custom Script-->
+  <script src="../assets/js/spreadsheets2.js"></script>
+
+
   <script>
     var ctx1 = document.getElementById("chart-line").getContext("2d");
 
